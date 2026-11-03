@@ -1,0 +1,381 @@
+# MINI GPT TEXT GENERATION — PROJECT GUIDE
+
+## 1. PROJECT OVERVIEW
+
+This project builds a small GPT-like language model from scratch using PyTorch.
+
+The model learns to predict the next token in a sequence and uses those predictions to generate text.
+
+### What We Learned
+
+- Tokenization
+- Token embeddings
+- Positional embeddings
+- Self-attention
+- Causal self-attention
+- Multi-head attention
+- Feed-forward neural networks
+- Transformer decoder blocks
+- GPT architecture
+- Next-token prediction
+- Model training
+- Text generation
+
+---
+
+## 2. PROJECT FILE STRUCTURE
+
+mini-gpt-text-generation/
+
+    config.py
+    tokenizer.py
+    dataset.py
+    attention.py
+    transformer_block.py
+    model.py
+    train.py
+    generate.py
+
+    data/
+        input.txt
+
+    models/
+        gpt_model.pth
+        tokenizer.json
+
+    PROJECT_GUIDE.txt
+
+---
+
+## 3. FILE-BY-FILE EXPLANATION
+
+### STEP 1 — config.py
+
+**Purpose:** Stores the project's configuration.
+
+Contains:
+
+- Device selection (CPU or GPU)
+- Context length / block size
+- Embedding dimensions
+- Number of attention heads
+- Number of Transformer layers
+- Dropout
+- Batch size
+- Learning rate
+- Training epochs
+
+This file controls the model and training settings.
+
+### STEP 2 — data/input.txt
+
+**Purpose:** Contains the training text.
+
+We provide sample sentences about:
+
+- Machine learning
+- Deep learning
+- Transformers
+- GPT
+
+The model learns language patterns from this text.
+
+### STEP 3 — tokenizer.py
+
+**Purpose:** Converts text into numerical token IDs.
+
+Contains:
+
+- Vocabulary creation
+- Word-to-ID mapping
+- ID-to-word mapping
+- encode()
+- decode()
+
+Example:
+
+    "GPT generates text"
+
+    [12, 7, 25]
+
+Our implementation uses a simple word-level tokenizer.
+
+Real GPT models generally use subword tokenization such as BPE.
+
+### STEP 4 — dataset.py
+
+**Purpose:** Prepares training examples for next-token prediction.
+
+It:
+
+- Converts text into token IDs.
+- Creates fixed-length input sequences.
+- Creates corresponding target sequences shifted by one token.
+
+Example:
+
+    Input:  [10, 20, 30, 40]
+    Target: [20, 30, 40, 50]
+
+The model learns to predict the next token at every position.
+
+### STEP 5 — attention.py
+
+**Purpose:** Implements the attention mechanism.
+
+Contains:
+
+1. Self-attention
+2. Causal self-attention
+3. Multi-head attention
+
+Important concepts:
+
+- Query (Q)
+- Key (K)
+- Value (V)
+- Attention scores
+- Scaling
+- Softmax
+- Causal masking
+- Multiple attention heads
+
+Causal masking prevents GPT from looking at future tokens.
+
+### STEP 6 — transformer_block.py
+
+**Purpose:** Combines attention and feed-forward networks into a Transformer decoder block.
+
+Contains:
+
+- Multi-head attention
+- Feed-forward neural network
+- Layer normalization
+- Residual connections
+- Dropout
+
+The block processes contextual information and transforms token representations.
+
+Our GPT model stacks multiple Transformer blocks.
+
+### STEP 7 — model.py
+
+**Purpose:** Defines the complete GPT language model.
+
+Contains:
+
+1. Token embedding
+2. Positional embedding
+3. Transformer blocks
+4. Final layer normalization
+5. Language modeling head
+
+Overall architecture:
+
+    Input Token IDs
+          |
+          v
+    Token Embeddings
+          |
+          +
+    Positional Embeddings
+          |
+          v
+    Transformer Block 1
+          |
+          v
+    Transformer Block 2
+          |
+          v
+    Final LayerNorm
+          |
+          v
+    Linear Language Model Head
+          |
+          v
+    Output Logits
+
+The output logits represent scores for every possible next token.
+
+### STEP 8 — train.py
+
+**Purpose:** Trains the GPT model.
+
+Training workflow:
+
+1. Load training text.
+2. Create tokenizer and vocabulary.
+3. Prepare the dataset.
+4. Create DataLoader.
+5. Initialize GPT model.
+6. Define cross-entropy loss.
+7. Define AdamW optimizer.
+8. Run the training loop.
+9. Calculate prediction loss.
+10. Backpropagate gradients.
+11. Update model parameters.
+12. Save the trained model.
+13. Save the tokenizer vocabulary.
+
+The model learns to predict the next token.
+
+Saved outputs:
+
+    models/gpt_model.pth
+    models/tokenizer.json
+
+### STEP 9 — generate.py
+
+**Purpose:** Loads the trained model and generates new text.
+
+Generation workflow:
+
+1. Load tokenizer vocabulary.
+2. Load trained GPT model weights.
+3. Accept a text prompt.
+4. Convert prompt into token IDs.
+5. Pass tokens through GPT.
+6. Get next-token logits.
+7. Select the token with the highest score.
+8. Append the predicted token.
+9. Repeat until the generation limit is reached.
+10. Convert token IDs back into text.
+
+Our current implementation uses greedy decoding (argmax).
+
+---
+
+## 4. COMPLETE PROJECT FLOW
+
+### A. Training Flow
+
+    data/input.txt
+          |
+          v
+       tokenizer.py
+          |
+          v
+       dataset.py
+          |
+          v
+       train.py
+          |
+          v
+       model.py
+          |
+          v
+    transformer_block.py
+          |
+          v
+       attention.py
+          |
+          v
+    Calculate Loss
+          |
+          v
+    Backpropagation
+          |
+          v
+    Update Parameters
+          |
+          v
+    Save Model + Tokenizer
+
+### B. Text Generation Flow
+
+    generate.py
+          |
+          v
+    Load tokenizer.json
+          |
+          v
+    Load gpt_model.pth
+          |
+          v
+    Enter Text Prompt
+          |
+          v
+    Convert Prompt to Token IDs
+          |
+          v
+    GPT Model
+          |
+          v
+    Predict Next Token
+          |
+          v
+    Append Predicted Token
+          |
+          v
+    Repeat Generation
+          |
+          v
+    Decode Token IDs
+          |
+          v
+    Generated Text
+
+---
+
+## 5. COMMANDS TO RUN THE PROJECT
+
+Activate virtual environment:
+
+    source venv/bin/activate
+
+Train the model:
+
+    python train.py
+
+Generate text:
+
+    python generate.py
+
+---
+
+## 6. WHAT WE HAVE COMPLETED
+
+| Concept | Status |
+|---|---|
+| Tokenization | Completed |
+| Dataset preparation | Completed |
+| Token embeddings | Completed |
+| Positional embeddings | Completed |
+| Self-attention | Completed |
+| Causal attention | Completed |
+| Multi-head attention | Completed |
+| Feed-forward network | Completed |
+| Transformer decoder block | Completed |
+| GPT architecture | Completed |
+| Next-token prediction | Completed |
+| Model training | Completed |
+| Model saving/loading | Completed |
+| Greedy text generation | Completed |
+
+---
+
+## 7. IMPORTANT THINGS TO REMEMBER
+
+1. GPT is a decoder-only Transformer.
+2. GPT uses causal self-attention.
+3. The model predicts the next token, not the entire sentence at once.
+4. Training teaches the model to predict tokens from examples.
+5. Generation repeatedly predicts and appends one token at a time.
+6. Our tokenizer is a basic word-level tokenizer, not GPT-2's BPE tokenizer.
+7. Our training dataset is very small, so the model can memorize the examples rather than learn general language.
+
+---
+
+## 8. NEXT LEARNING STEPS
+
+After understanding this project, the next useful steps are:
+
+1. Learn sampling methods: temperature, top-k and top-p.
+2. Use a pretrained GPT-2 model with Hugging Face Transformers.
+3. Learn how to fine-tune a pretrained language model.
+4. Build a practical text-generation application.
+5. Learn embeddings and RAG for document-based question answering.
+
+---
+
+END OF PROJECT GUIDE

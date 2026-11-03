@@ -1,0 +1,27 @@
+Text
+I love this product!
+
+
+
+Tokens
+['i', 'love', 'this', 'product', '!']
+
+
+
+Token IDs
+[1045, 2293, 2023, 4031, 999]
+
+
+
+Embeddings
+Seven vectors, each with 768 dimensions.
+
+
+
+Self-Attention
+Tokens exchange contextual information.
+
+
+
+Classification
+Positive or negative.

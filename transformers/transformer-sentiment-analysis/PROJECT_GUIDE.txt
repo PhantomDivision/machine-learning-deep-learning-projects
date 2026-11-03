@@ -1,0 +1,193 @@
+cat > PROJECT_GUIDE.txt <<'EOF'
+========================================================
+TRANSFORMER SENTIMENT ANALYSIS - PROJECT GUIDE
+========================================================
+
+PROJECT GOAL
+------------
+Build a sentiment analysis system using DistilBERT.
+
+The model classifies movie reviews as:
+1. POSITIVE
+2. NEGATIVE
+
+We explore a pretrained Transformer, understand its internals,
+fine-tune it on IMDb data, evaluate it, and make predictions.
+
+========================================================
+1. PROJECT SETUP
+========================================================
+
+requirements.txt
+----------------
+Contains the Python libraries required by the project.
+
+venv/
+----
+Python virtual environment.
+Keeps this project's dependencies separate from other projects.
+
+========================================================
+2. UNDERSTANDING THE PRETRAINED TRANSFORMER
+========================================================
+
+Execution order:
+
+1. main.py
+   Loads a pretrained DistilBERT sentiment analysis pipeline.
+   Takes text as input and predicts POSITIVE or NEGATIVE.
+
+2. explore.py
+   Used for additional exploration and experimentation
+   with the pretrained model.
+
+3. embeddings.py
+   Explores how text is converted into numerical embeddings.
+   Examines token embeddings, positional information,
+   and embedding dimensions.
+
+4. attention.py
+   Explores the self-attention mechanism.
+   Displays attention weights across Transformer layers
+   and attention heads.
+
+5. classification.py
+   Explores the classification process.
+   Examines model logits, softmax probabilities,
+   predicted sentiment, and confidence.
+
+========================================================
+3. DATASET PREPARATION
+========================================================
+
+Execution order:
+
+6. inspect_dataset.py
+   Loads the IMDb dataset and inspects:
+   - Dataset splits
+   - Features
+   - Number of examples
+   - Sentiment labels
+
+7. prepare_data.py
+   Prepares smaller dataset samples for our experiment.
+   Creates:
+   - Training dataset
+   - Validation dataset
+   - Test dataset
+
+8. tokenize_data.py
+   Converts review text into Transformer inputs:
+   - Input IDs
+   - Attention masks
+   - Tokenized sequences
+
+========================================================
+4. TRANSFORMER FINE-TUNING
+========================================================
+
+9. train.py
+   Performs fine-tuning of the pretrained DistilBERT model
+   using the IMDb training dataset.
+
+   Main activities:
+   - Loads the dataset
+   - Tokenizes reviews
+   - Loads the pretrained model
+   - Trains for multiple epochs
+   - Evaluates on validation data
+   - Evaluates on test data
+   - Saves the fine-tuned model
+
+   Training configuration used:
+   - Training samples: 1600
+   - Validation samples: 400
+   - Test samples: 500
+   - Epochs: 2
+   - Batch size: 4
+
+========================================================
+5. MODEL OUTPUTS
+========================================================
+
+fine_tuned_model/
+-----------------
+Contains the saved fine-tuned DistilBERT model,
+configuration, and tokenizer files.
+
+results/
+--------
+Contains training checkpoints and other Trainer outputs.
+
+========================================================
+6. CUSTOM PREDICTION
+========================================================
+
+10. predict.py
+    Loads the saved fine-tuned model from fine_tuned_model/.
+
+    Accepts new review text and predicts:
+    - POSITIVE or NEGATIVE
+    - Prediction confidence
+
+========================================================
+7. COMPLETE EXECUTION FLOW
+========================================================
+
+SETUP
+  |
+  v
+requirements.txt
+  |
+  v
+UNDERSTAND PRETRAINED MODEL
+  |
+  +--> main.py
+  |
+  +--> explore.py
+  |
+  +--> embeddings.py
+  |
+  +--> attention.py
+  |
+  +--> classification.py
+  |
+  v
+DATASET PREPARATION
+  |
+  +--> inspect_dataset.py
+  |
+  +--> prepare_data.py
+  |
+  +--> tokenize_data.py
+  |
+  v
+FINE-TUNING
+  |
+  +--> train.py
+  |
+  v
+SAVED MODEL
+  |
+  +--> fine_tuned_model/
+  |
+  v
+CUSTOM PREDICTIONS
+  |
+  +--> predict.py
+
+========================================================
+8. IMPORTANT NOTES
+========================================================
+
+- The starting DistilBERT checkpoint was already fine-tuned
+  on the SST-2 sentiment dataset.
+- We further fine-tuned it using IMDb movie reviews.
+- The final test accuracy was 88.4% on 500 test samples.
+- The final test F1-score was approximately 88.11%.
+- The model can classify new reviews using predict.py.
+
+========================================================
+END OF PROJECT GUIDE
+========================================================
+EOF

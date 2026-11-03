@@ -1,0 +1,52 @@
+1) data preparation
+2) EDA(exploratory data analysis)
+
+
+
+
+1) Data generation 
+Create small and large datasets.
+
+           
+2) Exploratory Data Analysis (EDA) 
+Understand data, distributions, missing values and correlations.
+
+
+3) Data preparation
+Separate X (features) and y (target).
+
+
+
+Train-test split
+Divide data into training and testing sets.
+
+
+
+Feature preprocessing
+Handle scaling and other transformations where needed.
+
+
+
+Model training
+Train Logistic Regression, Decision Tree, Random Forest and XGBoost.
+
+
+
+Model evaluation
+Confusion matrix, precision, recall, F1-score and ROC-AUC.
+
+
+
+
+4) Hyperparameter tuning
+Improve the selected model.
+
+
+
+5) Model explainability
+Understand predictions using SHAP.
+
+
+
+Deployment
+Build an application to predict customer churn.

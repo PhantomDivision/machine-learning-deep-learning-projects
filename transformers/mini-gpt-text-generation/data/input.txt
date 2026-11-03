@@ -1,0 +1,10 @@
+I love machine learning.
+Machine learning is interesting.
+Deep learning is a part of machine learning.
+Transformers are powerful deep learning models.
+GPT generates text using transformers.
+GPT predicts the next token.
+Machine learning helps computers learn patterns.
+Deep learning uses neural networks.
+Transformers use attention mechanisms.
+GPT is a decoder only transformer.
